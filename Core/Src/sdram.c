@@ -1,4 +1,3 @@
-
 /*
  * 	sdram.c
  *
@@ -8,13 +7,11 @@
 
 /* The FMC takes care of the majority of stuff with the SDRAM. Bank one starts at 0xC000 0000, bank 2 at 0xD000 0000. */
 
-
 #include "sdram.h"
 
 static SDRAM_HandleTypeDef SDRAM;
 static FMC_SDRAM_TimingTypeDef Timing;
 static FMC_SDRAM_CommandTypeDef Command;
-
 
 
 /**
@@ -75,7 +72,6 @@ void SDRAM_Init_Sequence(uint32_t RefreshCount)
   /* Set the device refresh rate */
   HAL_SDRAM_ProgramRefreshRate(&SDRAM, RefreshCount);
 }
-
 
 
 /**
@@ -201,7 +197,6 @@ void SDRAM_GPIOInit(SDRAM_HandleTypeDef  *hsdram)
 
 void SDRAM_Init(void)
 {
-
   /* SDRAM device configuration */
   SDRAM.Instance = FMC_SDRAM_DEVICE;
 
@@ -249,4 +244,3 @@ void SDRAM_Init(void)
   /* SDRAM sequence */
   SDRAM_Init_Sequence(REFRESH_COUNT);
 }
-

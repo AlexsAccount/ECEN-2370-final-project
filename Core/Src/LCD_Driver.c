@@ -7,11 +7,6 @@
 
 #include "LCD_Driver.h"
 
-/**
-  * @brief LTDC Initialization Function
-  * @param None
-  * @retval None
-  */
 
 static LTDC_HandleTypeDef hltdc;
 static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
@@ -87,18 +82,18 @@ void LCD_GPIO_Init(void)
  /* GPIOB configuration */
   GPIO_InitStructure.Pin = GPIO_PIN_8 | \
                            GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+						   HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 
  /* GPIOC configuration */
   GPIO_InitStructure.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_10;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 
- /* GPIOD configuration */
+  /* GPIOD configuration */
   GPIO_InitStructure.Pin = GPIO_PIN_3 | GPIO_PIN_6;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStructure);
 
  /* GPIOF configuration */
-  GPIO_InitStructure.Pin = GPIO_PIN_10;
+ GPIO_InitStructure.Pin = GPIO_PIN_10;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStructure);
 
  /* GPIOG configuration */
@@ -145,9 +140,14 @@ void LTCD_Layer_Init(uint8_t LayerIndex)
 
 void clearScreen(void)
 {
-  LCD_Clear(LCD_COLOR_WHITE);
+	LCD_Clear(LCD_COLOR_WHITE);
 }
 
+/**
+  * @brief LTDC Initialization Function
+  * @param None
+  * @retval None
+  */
 void LTCD__Init(void)
 {
 	hltdc.Instance = LTDC;
@@ -222,7 +222,6 @@ static void FillBuffer(uint32_t Destination, uint32_t Xsize, uint32_t Ysize, uin
 			/* poll/wait till dma transfer complete */
 			HAL_DMA2D_PollForTransfer(&Dma2dHandler, 10); //10ms timeout
 		}
-
 	}
 }
 
@@ -364,6 +363,8 @@ void LCD_Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
+
+
 
 // Touch Functionality   //
 

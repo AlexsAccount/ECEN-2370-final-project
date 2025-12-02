@@ -1,6 +1,7 @@
 #ifndef __FONTS_H
 #define __FONTS_H
 
+
 #include <stdint.h>
 
 //This was taken and adapted from stm32's mcu code
@@ -17,5 +18,3 @@ extern FONT_t Font12x12;
 
 
 #endif
-
-

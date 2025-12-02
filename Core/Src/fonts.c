@@ -1,4 +1,3 @@
-
 #include "fonts.h"
 
 //This was taken and adapted from stm32's mcu code
@@ -497,5 +496,3 @@ FONT_t Font12x12 = {
   12, /* Width */
   12, /* Height */
 };
-
-

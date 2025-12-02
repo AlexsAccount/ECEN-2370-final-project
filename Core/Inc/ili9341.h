@@ -107,7 +107,7 @@
 /**
   * @brief  ILI9341 Size
   */
-#define  ILI9341_LCD_PIXEL_WIDTH   ((uint16_t)240)
+#define  ILI9341_LCD_PIXEL_WIDTH    ((uint16_t)240)
 #define  ILI9341_LCD_PIXEL_HEIGHT   ((uint16_t)320)
 
 /**
@@ -124,12 +124,12 @@
   ActiveH=320 (323-2-2+1)
   VFP=4 (327-320-2-2+1)
 */
-#define  ILI9341_HSYNC            ((uint32_t)9)   /* Horizontal synchronization */
-#define  ILI9341_HBP              ((uint32_t)29)    /* Horizontal back porch      */
-#define  ILI9341_HFP              ((uint32_t)2)    /* Horizontal front porch     */
-#define  ILI9341_VSYNC            ((uint32_t)1)   /* Vertical synchronization   */
-#define  ILI9341_VBP              ((uint32_t)3)    /* Vertical back porch        */
-#define  ILI9341_VFP              ((uint32_t)2)    /* Vertical front porch       */
+#define  ILI9341_HSYNC            ((uint32_t)  9)   /* Horizontal synchronization */
+#define  ILI9341_HBP              ((uint32_t) 29)   /* Horizontal back porch      */
+#define  ILI9341_HFP              ((uint32_t)  2)   /* Horizontal front porch     */
+#define  ILI9341_VSYNC            ((uint32_t)  1)   /* Vertical synchronization   */
+#define  ILI9341_VBP              ((uint32_t)  3)   /* Vertical back porch        */
+#define  ILI9341_VFP              ((uint32_t)  2)   /* Vertical front porch       */
 
 /**
   * @brief  ILI9341 Registers

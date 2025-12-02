@@ -15,14 +15,15 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "ApplicationCode.h"
 #include <stdio.h>
 static void SystemClock_Config(void);
 
-
 /* Private functions ---------------------------------------------------------*/
+
 
 /**
   * @brief  Main program
@@ -41,11 +42,8 @@ int main(void)
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
   ApplicationInit();
-
   LCD_Visual_Demo();
-
   HAL_Delay(5000);
 
   // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
@@ -143,11 +141,3 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
