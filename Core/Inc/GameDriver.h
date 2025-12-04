@@ -14,6 +14,8 @@
 #include "Cashier.h"
 
 // "Would generate your screens and control basic display logic"
+
+
 void game_Init();
 
 

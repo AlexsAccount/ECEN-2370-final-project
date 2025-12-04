@@ -8,7 +8,10 @@
 #include "GameDriver.h"
 
 
-
+void game_Init()
+{
+    cashier_Init();
+}
 
 
 

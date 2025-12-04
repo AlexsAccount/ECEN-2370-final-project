@@ -19,10 +19,10 @@ typedef struct Cashier_HandleTypeDef
 } Cashier_HandleTypeDef;
 
 
-void cashier_Init(Cashier_HandleTypeDef *cashier);
-void cashier_SetBalance(Cashier_HandleTypeDef *cashier, uint32_t number);
-void cashier_RandomBalance(Cashier_HandleTypeDef *cashier);
-uint32_t cashier_ReturnBalance(Cashier_HandleTypeDef *cashier);
+void cashier_Init();
+void cashier_SetBalance(uint32_t number);
+void cashier_SetRandomBalance();
+uint32_t cashier_ReturnBalance();
 
 
 #endif /* INC_CASHIER_H_ */
