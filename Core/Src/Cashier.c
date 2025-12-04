@@ -13,7 +13,7 @@ Cashier_HandleTypeDef cashier;
 
 void cashier_Init()
 {
-    cashier_SetRandomBalance();
+    cashier.Balance = 100;
 }
 
 void cashier_SetBalance(uint32_t number)

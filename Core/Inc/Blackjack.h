@@ -67,12 +67,14 @@ typedef struct BlackJack_Player_HandleTypeDef
 //      - "stand" reveals dealer hand and compares values.
 // player wins if hand is higher than dealer's. loses if hand is higher than 21
 //      - ace is 11 and face cards are 10. other card values unchanged
+//      - win is +$100, loss is -$100
 
 
 void blackJack_Init();          // set cards and hand_value to zero for player and dealer. meant to be called only once at app startup
 void blackJack_NewRound();      // give random pair of cards to player and dealer
 int blackJack_Hit();            // provide player with additional card and check for lose condition
 bool blackJack_Stand();         // compare player and dealer hands
+void blackJack_Payout();        // adjust player balance after a win/loss
 
 // Helpers
 bool blackJack_Cheat();         // check for cheat condition and set player hand as ace + face card

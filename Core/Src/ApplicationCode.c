@@ -3,11 +3,15 @@
  *
  *  Created on: Dec 30, 2023
  *      Author: Xavion
+ * 
+ *  Modified on: Dec 3, 2025
+ * 		Author: Alex
  */
 
 #include "ApplicationCode.h"
 
 /* Static variables */
+
 
 
 extern void initialise_monitor_handles(void); 
@@ -22,15 +26,13 @@ void LCDTouchScreenInterruptGPIOInit(void);
 
 void ApplicationInit(void)
 {
-	
-
-
 	initialise_monitor_handles(); // Allows printf functionality
 
 	LTCD__Init();
     LTCD_Layer_Init(0);
     LCD_Clear(LCD_COLOR_WHITE);
 
+	game_Init();
 
 
     #if COMPILE_TOUCH_FUNCTIONS == 1
@@ -46,6 +48,20 @@ void ApplicationInit(void)
 
 	#endif // COMPILE_TOUCH_FUNCTIONS
 }
+
+
+
+
+
+
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	
+}
+
+
 
 void LCD_Visual_Demo(void)
 {

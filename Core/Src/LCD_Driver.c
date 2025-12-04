@@ -19,7 +19,8 @@ static void FillBuffer(uint32_t Destination, uint32_t Xsize, uint32_t Ysize, uin
 
 /*
  * fb[y*W+x] OR fb[y][x]
- * Alternatively, we can modify the linker script to have an end address of 20013DFB instead of 2002FFFF, so it does not place variables in the same region as the frame buffer. In this case it is safe to just specify the raw address as frame buffer.
+ * Alternatively, we can modify the linker script to have an end address of 20013DFB instead of 2002FFFF, so it does not place variables in the same region as the frame buffer.
+ * In this case it is safe to just specify the raw address as frame buffer.
  */
 //uint32_t frameBuffer[(LCD_PIXEL_WIDTH_X*LCD_PIXEL_HEIGHT_Y)/2] = {0};		//16bpp pixel format. We can size to uint32. this ensures 32 bit alignment
 
@@ -266,6 +267,15 @@ void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color
   }
 }
 
+// experimental. idk if this works. adapted from above vert line funct
+void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color)
+{
+  for (uint16_t i = 0; i < len; i++)
+  {
+	  LCD_Draw_Pixel(i+x, y, color);
+  }
+}
+
 void LCD_Clear(uint32_t Color)
 {
 	FillBuffer(hltdc.LayerCfg[0].FBStartAdress, LCD_PIXEL_WIDTH_X, LCD_PIXEL_HEIGHT_Y, 0, Color);
@@ -309,6 +319,8 @@ void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
   Ascii -= 32;
   LCD_Draw_Char(Xpos, Ypos, &LCD_Currentfonts->table[Ascii * LCD_Currentfonts->Height]);
 }
+
+
 
 void visualDemo(void)
 {

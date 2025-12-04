@@ -20,9 +20,14 @@
 #include "main.h"
 #include "ApplicationCode.h"
 #include <stdio.h>
-static void SystemClock_Config(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+static void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_TIM6_Init(void);
+
+/* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim6;
 
 
 /**
@@ -42,13 +47,18 @@ int main(void)
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
+  
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_TIM6_Init();
+
   ApplicationInit();
-  LCD_Visual_Demo();
+  //LCD_Visual_Demo();
   HAL_Delay(5000);
 
   // DO NOT CALL THIS FUNCTION WHEN INTERRUPT MODE IS SELECTED IN THE COMPILE SWITCH IN stmpe811.h
   // Un-comment the below function after setting COMPILE_TOUCH to 1 in stmpe811.h
-  LCD_Touch_Polling_Demo(); // This function Will not return
+  //LCD_Touch_Polling_Demo(); // This function Will not return
 
   while (1)
   {
@@ -108,6 +118,69 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  // __HAL_RCC_GPIOG_CLK_ENABLE();
+
+  // /*Configure GPIO pin Output Level */
+  // HAL_GPIO_WritePin(GPIOG, LD3_Pin|LD4_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : B1_Pin */
+  GPIO_InitStruct.Pin = B1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+  // /*Configure GPIO pins : LD3_Pin LD4_Pin */
+  // GPIO_InitStruct.Pin = LD3_Pin|LD4_Pin;
+  // GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  // GPIO_InitStruct.Pull = GPIO_NOPULL;
+  // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  // HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 1);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+}
+
+/**
+  * @brief TIM6 Initialization Function
+  * @param None
+  * @retval None
+  */
+void MX_TIM6_Init(void)
+{
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 2999;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 999;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+
+
 
 void Error_Handler(void)
 {

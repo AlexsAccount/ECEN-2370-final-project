@@ -70,6 +70,20 @@ bool blackJack_Stand()
     return blackJack_CompareCards();
 }
 
+void blackJack_Payout()
+{
+    uint32_t temp_bal;
+    temp_bal = cashier_ReturnBalance();
+    
+    if (blackJack_CompareCards())
+    {
+        temp_bal += 100;
+    }
+    else { temp_bal -= 100; }
+    
+    cashier_SetBalance(temp_bal);
+}
+
 
 
 // Helpers

@@ -48,7 +48,7 @@ The color format for the Display is chosen as RGB888. 8 bits or 255 values for R
 #define LCD_COLOR_ORANGE        0xFFA500
 #define LCD_COLOR_BLACK         0x000000
 
-/* Timing configuration from datahseet
+/* Timing configuration from datasheet
   HSYNC=10 (9+1)
   HBP=20 (29-10+1)
   ActiveW=240 (269-20-10+1)
@@ -82,9 +82,11 @@ void LCD_Draw_Circle_Fill(uint16_t Xpos, uint16_t Ypos, uint16_t radius, uint32_
 
 // Draw Vertical Line
 void LCD_Draw_Vertical_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color);
+// Draw horizontal line
+void LCD_Draw_Horizontal_Line(uint16_t x, uint16_t y, uint16_t len, uint32_t color);
+
 void LCD_Clear(uint32_t Color);
 
-void LCD_Error_Handler(void);
 
 // Demo using provided functions
 void visualDemo(void);
@@ -103,6 +105,11 @@ void WriteDataToTouchModule(uint8_t RegToWrite, uint8_t writeData);
 
 
 /*        APPLICATION SPECIFIC FUNCTION DECLARATION - PUT YOUR NEWLY CREATED FUNCTIONS HERE       */
+
+
+void LCD_DisplayInt(uint16_t Xpos, uint16_t Ypos, int value);
+
+
 
 
 #endif /* INC_LCD_DRIVER_H_ */
